@@ -15,13 +15,13 @@ searchBox.addEventListener('input', debounce(onSearch, DEBOUNCE_DELAY));
 function onSearch(event) {
     resetMarkup();
 
-    const searchContry = event.target.value;
+    const searchCountry = event.target.value.trim();
 
-    if (searchContry === '') {
+    if (searchCountry.length < 1) {
         return;
     }
 
-    const normalizedSearchCountry = searchContry.trim().toLowerCase();
+    const normalizedSearchCountry = searchCountry.trim().toLowerCase();
     fetchCountries(normalizedSearchCountry)
         .then(countries => render(countries))
         .catch(error => Notify.failure('Oops, there is no country with that name'));
